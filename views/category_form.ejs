@@ -1,0 +1,17 @@
+<%- include('header.ejs') %>
+<section>
+    <h1><%= title %></h1>
+    <form action="" method="post">
+        <fieldset>
+            <legend>Category:</legend>
+            <input type="text" name="name" placeholder="Enter a new category" value="<%= locals.category === undefined ? '' : locals.category.name %>">
+        </fieldset>
+            <button type="submit">Submit</button>
+    </form>
+    <% if(locals.errors){locals.errors.forEach(function(error){%>
+        <div class="alert alert-danger"><%= error.msg %></div>
+    <% })} %>
+</section>
+<%- include('footer.ejs') %>
+
+

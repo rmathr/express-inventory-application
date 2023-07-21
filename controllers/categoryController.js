@@ -1,6 +1,6 @@
+const { body, validationResult } = require('express-validator');
 const Category = require('../models/category');
 const Product = require('../models/product');
-
 const asyncHandler = require('express-async-handler');
 
 exports.category_list = asyncHandler(async (req, res, next) => {
@@ -31,3 +31,35 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
     category_products: productsInCategory,
   });
 });
+
+exports.category_create_get = (req, res, next) => {
+  res.render('category_form', { title: 'Create Category' });
+};
+
+exports.category_create_post = [
+  body('name', 'Category name must contain at least 2 characters.')
+    .trim()
+    .isLength({ min: 2 })
+    .escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const category = new Category({ name: req.body.name });
+    if (!errors.isEmpty()) {
+      //   console.log(errors);
+      res.render('category_form', {
+        title: 'Create Category',
+        category: category,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const categoryExists = await Category.findOne({ name: req.body.name }).exec();
+      if (categoryExists) {
+        res.redirect(categoryExists.url);
+      } else {
+        await category.save();
+        res.redirect(category.url);
+      }
+    }
+  }),
+];

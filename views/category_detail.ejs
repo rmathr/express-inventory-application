@@ -1,0 +1,15 @@
+<%- include('header.ejs') %>
+<section>
+    <h1><%= title %></h1>
+    <p><%= category.name %></p>
+    <div>
+        <p>Products</p>
+        <ul>
+            <% category_products.forEach(function(item,index){ %>
+                <li> <a href="<%=item.url%>"><%= item.product_name %></a></li>
+                <!-- <li> item.product_name</li> -->
+                <% }) %>
+        </ul>
+    </div>
+</section>
+<%- include('footer.ejs') %>

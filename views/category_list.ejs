@@ -1,0 +1,10 @@
+<%- include('header.ejs') %>
+        <section>
+            <h1><%- title %></h1>
+            <ul>
+                <% category_list.forEach(function(item,index){ %>
+                    <li> <a href="<%=item.url%>"><%= item.name %></a></li>
+                <% }) %>
+            </ul>
+        </section>
+<%- include('footer.ejs') %>

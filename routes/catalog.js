@@ -50,10 +50,10 @@ router.get('/category/:id/delete', category_controller.category_delete_get);
 router.post('/category/:id/delete', category_controller.category_delete_post);
 
 // // GET request to update Genre.
-// router.get('/genre/:id/update', genre_controller.genre_update_get);
+router.get('/category/:id/update', category_controller.category_update_get);
 
 // // POST request to update Genre.
-// router.post('/genre/:id/update', genre_controller.genre_update_post);
+router.post('/category/:id/update', category_controller.category_update_post);
 
 // // GET request for one Genre.
 router.get('/category/:id', category_controller.category_detail);

@@ -98,3 +98,52 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
     res.redirect('/catalog/categories');
   }
 });
+
+exports.category_update_get = asyncHandler(async (req, res, next) => {
+  const category = await Category.findById(req.params.id).exec();
+
+  if (category === null) {
+    const err = new Error('Category not found');
+    err.status = 404;
+    return next(err);
+  }
+  // console.log(product.category._id.toString());
+  // console.log(allCategories[0]._id.toString());
+  res.render('category_form', {
+    title: 'Update Category',
+    category: category,
+  });
+  // res.send('NOT IMPLEMENTED: Product update GET');
+});
+
+exports.category_update_post = [
+  body('name', 'Category name must contain at least 2 characters.')
+    .trim()
+    .isLength({ min: 2 })
+    .escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const category = new Category({ name: req.body.name, _id: req.params.id });
+    if (!errors.isEmpty()) {
+      //   console.log(errors);
+      res.render('category_form', {
+        title: 'Update Category',
+        category: category,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const categoryExists = await Category.findOne({ name: req.body.name }).exec();
+      if (categoryExists) {
+        res.redirect(categoryExists.url);
+      } else {
+        const updatedCategory = await Category.findByIdAndUpdate(
+          req.params.id,
+          category,
+          {}
+        );
+        res.redirect(updatedCategory.url);
+      }
+    }
+  }),
+];

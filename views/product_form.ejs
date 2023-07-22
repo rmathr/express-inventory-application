@@ -5,26 +5,26 @@
                 <div class="form-group">
                     <label>
                         Product Name:
-                        <input type="text" name="product_name" value="" required placeholder="Name of product">
+                        <input type="text" name="product_name" value="<%= locals.product === undefined ? '' : locals.product.product_name %>" required placeholder="Name of product">
                     </label>
                 </div>
                 <div class="form-group">
                     <label>
                         Description:
-                        <textarea name="description" cols="30" rows="10" placeholder="Description" required></textarea>
+                        <textarea name="description" cols="30" rows="10" placeholder="Description" required><%= locals.product  === undefined ? '' : locals.product.description %></textarea>
                     </label>
                 </div>
 
                 <div class="form-group">
                     <label>
                         Price:
-                        <input type="number" name="price" placeholder="Price of product" min="0" required value="">
+                        <input type="number" name="price" placeholder="Price of product" min="0" required value="<%= locals.product  === undefined ? '' : locals.product.price %>">
                     </label>
                 </div>
                 <div class="form-group">
                     <label>
                         Quantity:
-                        <input type="number" name="stock_quantity" min="0" placeholder="Quantity in stock" required value="">
+                        <input type="number" name="stock_quantity" min="0" placeholder="Quantity in stock" required value="<%= locals.product  === undefined ? '' : locals.product.stock_quantity %>">
                     </label>
                 </div>
                 <div class="form-group">
@@ -32,10 +32,11 @@
                         <legend>Category:</legend>
                         <select name="category">
                         <% for(let i = 0; i < categories.length; i++){ %>
-                            <option value="<%= categories[i]._id%>"><%= categories[i].name%></option>
+                            <option value="<%= categories[i]._id%>" id="<%= categories[i]._id.toString()%>" <%= locals.product.category._id.toString() == categories[i]._id.toString() ? 'selected' : '' %>><%= categories[i].name%></option>
                             <!-- <input type="radio" name="category" id="<%= categories[i]._id%>" value="<%= categories[i].name%>"> -->
                             <!-- <label for="<%= categories[i]._id%>"><%= categories[i].name%></label>  -->
                             <!-- <p><%= categories[i].name%></p> -->
+                            
                         <%}%>
                     </select>
                 </fieldset>
@@ -44,3 +45,5 @@
             </form>
         </section>
 <%- include('footer.ejs') %>
+
+

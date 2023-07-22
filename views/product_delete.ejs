@@ -1,0 +1,17 @@
+<%- include('header.ejs') %>
+<section>
+    <h1><%= title %></h1>
+    <div class="product-info">
+        <p><%= product.product_name %></p>
+        <p><%= product.description %></p>
+        <p><%= product.price %></p>
+    </div>
+        <p>Do you really want to delete this product?</p>
+        <form action="" method="post">
+            <div class="form-group">
+                <input type="hidden" name="productid" required='true' value="<%= product._id %>">
+                <button type="submit">Delete</button>
+            </div>
+        </form>
+</section>
+<%- include('footer.ejs') %>

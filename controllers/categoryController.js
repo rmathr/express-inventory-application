@@ -63,3 +63,38 @@ exports.category_create_post = [
     }
   }),
 ];
+
+exports.category_delete_get = asyncHandler(async (req, res, next) => {
+  const [category, allProductsByCategory] = await Promise.all([
+    Category.findById(req.params.id).exec(),
+    Product.find({ category: req.params.id }, 'product_name price').exec(),
+  ]);
+
+  if (category === null) {
+    res.redirect('/catalog/categories');
+  }
+  res.render('category_delete', {
+    title: 'Category Delete',
+    category: category,
+    category_products: allProductsByCategory,
+  });
+});
+
+exports.category_delete_post = asyncHandler(async (req, res, next) => {
+  const [category, allProductsByCategory] = await Promise.all([
+    Category.findById(req.params.id).exec(),
+    Product.find({ category: req.params.id }, 'product_name price').exec(),
+  ]);
+
+  if (allProductsByCategory.length > 0) {
+    res.render('category_delete', {
+      title: 'Category Delete',
+      category: category,
+      category_products: allProductsByCategory,
+    });
+    return;
+  } else {
+    await Category.findByIdAndRemove(req.body.categoryid);
+    res.redirect('/catalog/categories');
+  }
+});

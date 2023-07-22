@@ -1,0 +1,25 @@
+<%- include('header.ejs') %>
+<section>
+    <h1><%= title%>: <%= category.name %></h1>
+    <% if(locals.category_products.length > 0) { %>
+        <p>Delete the products below before deleting this category.</p>
+        <div>
+            <p>Products:</p>
+            <ul>
+                <% category_products.forEach(function(item,index){ %>
+                    <li> <a href="<%=item.url%>"><%= item.product_name %></a></li>
+                <% }) %>
+            </ul>
+        </div>
+
+    <% } else { %>
+        <p>Do you really want to delete this category?</p>
+        <form action="" method="post">
+            <div class="form-group">
+                <input type="hidden" name="categoryid" required='true' value="<%= category._id %>">
+                <button type="submit">Delete</button>
+            </div>
+        </form>
+        <% } %>
+</section>
+<%- include('footer.ejs') %>

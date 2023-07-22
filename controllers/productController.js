@@ -113,12 +113,22 @@ exports.product_create_post = [
 
 // Display book delete form on GET.
 exports.product_delete_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product delete GET');
+  const product = await Product.findById(req.params.id).exec();
+  if (product === null) {
+    res.redirect('/catalog/products');
+  }
+  res.render('product_delete', {
+    title: 'Product Delete',
+    product: product,
+  });
+  // res.send('NOT IMPLEMENTED: Product delete GET');
 });
 
 // Handle book delete on POST.
 exports.product_delete_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Product delete POST');
+  await Product.findByIdAndRemove(req.body.productid);
+  res.redirect('/catalog/products');
+  // res.send('NOT IMPLEMENTED: Product delete POST');
 });
 
 // Display book update form on GET.

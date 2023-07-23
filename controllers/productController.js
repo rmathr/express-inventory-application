@@ -36,9 +36,10 @@ exports.product_detail = asyncHandler(async (req, res, next) => {
 // Display book create form on GET.
 exports.product_create_get = asyncHandler(async (req, res, next) => {
   const allCategories = await Category.find().exec();
-  console.log(allCategories);
+  // console.log(allCategories);
   res.render('product_form', {
     title: 'Create Product',
+    product: { category: { _id: '' } },
     categories: allCategories,
   });
 

@@ -1,0 +1,54 @@
+h1{
+    font-size: clamp(1rem, 0.6429rem + 1.1429vw, 1.5rem);
+}
+
+.product-detail {
+    padding: 48px;
+    max-width: 50%;
+}
+
+
+.product-info{
+    padding-top: 24px;
+}
+
+.product-info p{
+    margin: 16px 0;
+}
+
+.product-name{
+    font-size: 1.2rem;
+}
+
+.product-price{
+    width: fit-content;
+    border-radius: 10px;
+    background-color: rgba(34, 139, 34, 1);
+    padding: 2px 8px;
+    color: #efefef;
+}
+
+.product-category{
+    border: 1px solid #d0d0d5;
+    background-color: #d0d0d5;
+    width: fit-content;
+    padding: 2px 8px;
+    font-style: italic;
+}
+
+.update-delete-control button{
+    border: none;
+    border-radius: 3px;
+    width: fit-content;
+    padding: 4px 16px;
+    margin-top: 45px;
+}
+
+.update-delete-control button:first-of-type{
+    background-color: #ffc107;
+}
+
+.update-delete-control button:nth-of-type(2){
+    background-color: #dc3545;
+    color: #efefef;
+}

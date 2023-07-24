@@ -1,2 +1,14 @@
-<%- include('header.ejs') %>
+<link rel="stylesheet" href="/stylesheets/homepage.css">
+<%- include('header.ejs', locals.count) %>
+<section class="homepage">
+<div class="homepage-text">
+    <p><span>Welcome to Dog</span>Smart - Your trusted pet shop for dogs!</p>
+    <p>Discover a tail-wagging collection of premium dog products. From nutritious food to playful toys, we've got it all!</p>
+    <p>Shop now for happy and healthy dogs! Fast shipping and excellent customer support. Let's make your bestfriend's day brighter!</p>
+</div>
+<div class="homepage-link">
+    <img class="homepage-image" src="/images/manchinha.jpg" alt="" srcset="">
+    <a class="homepage-button" href="/catalog/products">All Products</a>
+</div>
+</section>
 <%- include('footer.ejs') %>

@@ -6,8 +6,6 @@ const product_controller = require('../controllers/productController');
 
 const category_controller = require('../controllers/categoryController');
 
-/// BOOK ROUTES ///
-
 // GET catalog home page.
 router.get('/', product_controller.index);
 

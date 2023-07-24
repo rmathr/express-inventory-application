@@ -2,10 +2,26 @@ const Category = require('../models/category');
 const Product = require('../models/product');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
+var numeral = require('numeral');
+
+async function countItems() {
+  return {
+    products: await Product.find().countDocuments({}),
+    categories: await Category.find().countDocuments({}),
+  };
+}
 
 exports.index = asyncHandler(async (req, res, next) => {
   // res.send('NOT IMPLEMENTED: Site Home Page');
-  res.render('index');
+
+  // async function countItems(db) {
+  //   const count = await db.find().countDocuments({});
+  //   return count;
+  // }
+
+  res.render('index', {
+    count: await countItems(),
+  });
 });
 
 // Display list of all books.
@@ -13,7 +29,12 @@ exports.product_list = asyncHandler(async (req, res, next) => {
   const allProducts = await Product.find({}, 'product_name price')
     .sort({ product_name: 1 })
     .exec();
-  res.render('product_list', { title: 'Product List', product_list: allProducts });
+  res.render('product_list', {
+    title: 'Product List',
+    product_list: allProducts,
+    numeral: numeral,
+    count: await countItems(),
+  });
   // res.send('NOT IMPLEMENTED: Product list');
 });
 
@@ -28,6 +49,8 @@ exports.product_detail = asyncHandler(async (req, res, next) => {
   res.render('product_detail', {
     title: 'Product Detail',
     product: product,
+    numeral: numeral,
+    count: await countItems(),
   });
 
   // res.send(`NOT IMPLEMENTED: Product detail: ${req.params.id}`);
@@ -41,6 +64,7 @@ exports.product_create_get = asyncHandler(async (req, res, next) => {
     title: 'Create Product',
     product: { category: { _id: '' } },
     categories: allCategories,
+    count: await countItems(),
   });
 
   // res.send('NOT IMPLEMENTED: Product create GET');
@@ -103,6 +127,7 @@ exports.product_create_post = [
         categories: allCategories,
         product: product,
         errors: errors.array(),
+        count: await countItems(),
       });
     } else {
       // Data from form is valid. Save book.
@@ -121,6 +146,7 @@ exports.product_delete_get = asyncHandler(async (req, res, next) => {
   res.render('product_delete', {
     title: 'Product Delete',
     product: product,
+    count: await countItems(),
   });
   // res.send('NOT IMPLEMENTED: Product delete GET');
 });
@@ -155,6 +181,7 @@ exports.product_update_get = asyncHandler(async (req, res, next) => {
     title: 'Update Product',
     product: product,
     categories: allCategories,
+    count: await countItems(),
   });
   // res.send('NOT IMPLEMENTED: Product update GET');
 });
@@ -209,6 +236,7 @@ exports.product_update_post = [
         categories: allCategories,
         product: product,
         errors: errors.array(),
+        count: await countItems(),
       });
     } else {
       // Data from form is valid. Save book.

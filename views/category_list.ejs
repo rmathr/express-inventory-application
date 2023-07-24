@@ -1,10 +1,11 @@
-<%- include('header.ejs') %>
-        <section>
+<link rel="stylesheet" href="/stylesheets/category_list.css">
+<%- include('header.ejs', locals.count) %>
+        <section class="category-list">
             <h1><%- title %></h1>
-            <ul>
-                <% category_list.forEach(function(item,index){ %>
-                    <li> <a href="<%=item.url%>"><%= item.name %></a></li>
-                <% }) %>
-            </ul>
+                <div class="category-items">
+                    <% category_list.forEach(function(item,index){ %>
+                        <p> <a href="/catalog/category/<%=item._doc._id%>"><%= item._doc.name %></a> (<%= item.count  %>)</p>
+                    <% }) %>
+                </div>
         </section>
 <%- include('footer.ejs') %>

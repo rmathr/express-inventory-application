@@ -1,0 +1,12 @@
+.category-list{
+    padding: 48px;
+    width: 100%;
+}
+
+.category-items{
+    margin-top: 24px;
+}
+
+.category-items p{
+    margin: 8px 0;
+}

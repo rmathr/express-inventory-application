@@ -2,12 +2,42 @@ const { body, validationResult } = require('express-validator');
 const Category = require('../models/category');
 const Product = require('../models/product');
 const asyncHandler = require('express-async-handler');
+const category = require('../models/category');
+
+async function countItems() {
+  return {
+    products: await Product.find().countDocuments({}),
+    categories: await Category.find().countDocuments({}),
+  };
+}
 
 exports.category_list = asyncHandler(async (req, res, next) => {
   const allCategories = await Category.find().sort({ name: 1 }).exec();
+
+  async function countProducts(categoryId) {
+    const count = await Product.find().countDocuments({
+      category: categoryId,
+    });
+    return count;
+  }
+  const count = await Product.find().countDocuments({
+    category: '64b9865eca84b4c6a0d29e04',
+  });
+
+  const categoriesCount = await Promise.all(
+    allCategories.map((category) => countProducts(category._id))
+  );
+
+  const categoriesWithCount = [];
+  for (let i = 0; i < allCategories.length; i++) {
+    categoriesWithCount[i] = { ...allCategories[i], count: categoriesCount[i] };
+  }
+  //   console.log(categoriesWithCount);
+
   res.render('category_list', {
     title: 'Category List',
-    category_list: allCategories,
+    category_list: categoriesWithCount,
+    count: await countItems(),
   });
   // res.send('NOT IMPLEMENTED: Genre list');
 });
@@ -29,6 +59,7 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
     title: 'Category Detail',
     category: category,
     category_products: productsInCategory,
+    count: await countItems(),
   });
 });
 
@@ -50,6 +81,7 @@ exports.category_create_post = [
         title: 'Create Category',
         category: category,
         errors: errors.array(),
+        count: await countItems(),
       });
       return;
     } else {
@@ -77,6 +109,7 @@ exports.category_delete_get = asyncHandler(async (req, res, next) => {
     title: 'Category Delete',
     category: category,
     category_products: allProductsByCategory,
+    count: await countItems(),
   });
 });
 
@@ -91,6 +124,7 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
       title: 'Category Delete',
       category: category,
       category_products: allProductsByCategory,
+      count: await countItems(),
     });
     return;
   } else {
@@ -112,6 +146,7 @@ exports.category_update_get = asyncHandler(async (req, res, next) => {
   res.render('category_form', {
     title: 'Update Category',
     category: category,
+    count: await countItems(),
   });
   // res.send('NOT IMPLEMENTED: Product update GET');
 });
@@ -130,6 +165,7 @@ exports.category_update_post = [
         title: 'Update Category',
         category: category,
         errors: errors.array(),
+        count: await countItems(),
       });
       return;
     } else {

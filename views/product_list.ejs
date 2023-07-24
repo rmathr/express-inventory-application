@@ -1,10 +1,15 @@
-<%- include('header.ejs') %>
-<section>
+<link rel="stylesheet" href="/stylesheets/product_list.css">
+<%- include('header.ejs', locals.count) %>
+<section class="product-list">
     <h1><%= title%></h1>
-    <ul>
+
         <% product_list.forEach(function(item,index){ %>
-            <li> <a href="<%=item.url%>"><%= item.product_name %></a> - <%= item.price%></li>
+            <div class="product-card">
+                <p class="product-name"> <%= item.product_name %></p>
+                <p class="product-price"><%= numeral(item.price).format('$ 0,0[.]00')  %></p>
+                <a class="product-view" href="<%=item.url%>">view</a>
+            </div>
         <% }) %>
-    </ul>
+    
 </section>
 <%- include('footer.ejs') %>

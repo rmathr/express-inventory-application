@@ -1,13 +1,17 @@
-<%- include('header.ejs') %>
-<section class="bg-red-500">
+<link rel="stylesheet" href="/stylesheets/product_detail.css">
+<%- include('header.ejs', locals.count) %>
+<section class="product-detail">
     <h1><%= title %></h1>
-    <div>
-        <p class="text-green-700"><%= product.product_name %></p>
-        <p><%= product.description%></p>
-        <p><%= product.price%></p>
-        <p><%= product.category.name %></p>
+    <div class="product-info">
+        <p class="product-name"><%= product.product_name %></p>
+        <p class="product-description"><%= product.description%></p>
+        <p class="product-quantity">Quantity: <%= product.stock_quantity %></p>
+        <p class="product-price"><%= numeral(product.price).format('$ 0,0[.]00')  %> </p>
+        <p class="product-category"><%= product.category.name %></p>
     </div>
-    <a href="<%=product.url%>/update">Update Product</a>
-    <a href="<%=product.url%>/delete">Delete Product</a>
+    <div class="update-delete-control">
+        <button><a href="<%=product.url%>/update">Update</a></button>
+        <button><a href="<%=product.url%>/delete">Delete</a></button>
+    </div>
 </section>
 <%- include('footer.ejs') %>

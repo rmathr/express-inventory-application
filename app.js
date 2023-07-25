@@ -1,4 +1,4 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
@@ -7,6 +7,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const RateLimit = require('express-rate-limit');
 
+dotenv.config();
 mongoose.set('strictQuery', false);
 const mongoDB = process.env.MONGODB_URL;
 

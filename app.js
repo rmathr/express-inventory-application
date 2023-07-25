@@ -10,6 +10,7 @@ const RateLimit = require('express-rate-limit');
 dotenv.config();
 mongoose.set('strictQuery', false);
 const mongoDB = process.env.MONGODB_URL;
+const PORT = process.env.PORT || 3000;
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -38,6 +39,6 @@ app.use(express.json());
 app.use('/', indexRouter);
 app.use('/catalog', catalogRouter);
 
-app.listen(3000);
+app.listen(PORT);
 
 module.exports = app;

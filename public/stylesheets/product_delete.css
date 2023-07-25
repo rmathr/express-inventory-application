@@ -1,0 +1,32 @@
+.product-delete {
+  padding: 48px;
+  width: 100%;
+}
+
+h1 {
+  font-size: clamp(1rem, 0.6429rem + 1.1429vw, 1.5rem);
+}
+
+.product-info {
+  padding-top: 24px;
+  max-width: 40%;
+}
+
+.product-info p {
+  margin: 16px 0;
+}
+.product-info p:first-of-type {
+  font-size: 1.2rem;
+}
+
+.product-delete-button {
+  border: none;
+  border-radius: 3px;
+  width: fit-content;
+  padding: 4px 16px;
+  margin-top: 45px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #dc3545;
+  color: #efefef;
+}

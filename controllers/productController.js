@@ -147,6 +147,7 @@ exports.product_delete_get = asyncHandler(async (req, res, next) => {
     title: 'Product Delete',
     product: product,
     count: await countItems(),
+    numeral: numeral,
   });
   // res.send('NOT IMPLEMENTED: Product delete GET');
 });

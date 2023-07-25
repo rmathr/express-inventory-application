@@ -1,15 +1,15 @@
+<link rel="stylesheet" href="/stylesheets/category_delete.css">
 <%- include('header.ejs', locals.count) %>
-<section>
+<section class="category-delete">
     <h1><%= title%>: <%= category.name %></h1>
     <% if(locals.category_products.length > 0) { %>
         <p>Delete the products below before deleting this category.</p>
-        <div>
+        <div class="category-delete-products">
             <p>Products:</p>
-            <ul>
+            
                 <% category_products.forEach(function(item,index){ %>
-                    <li> <a href="<%=item.url%>"><%= item.product_name %></a></li>
+                    <p class="products-in-category"> <a href="<%=item.url%>"><%= item.product_name %></a></p>
                 <% }) %>
-            </ul>
         </div>
 
     <% } else { %>

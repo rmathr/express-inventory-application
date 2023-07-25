@@ -1,0 +1,48 @@
+.product-form {
+  padding: 48px;
+  max-width: 40%;
+}
+
+h1 {
+  font-size: clamp(1rem, 0.6429rem + 1.1429vw, 1.5rem);
+}
+
+.product-form-inputs {
+  padding-top: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 16px 0;
+}
+
+textarea {
+  resize: none;
+  min-width: 450px;
+}
+
+.form-group input {
+  outline: none;
+  border: none;
+}
+
+.submit-product {
+  background-color: #14a44d;
+  color: #efefef;
+  border: none;
+  border-radius: 3px;
+  width: fit-content;
+  padding: 4px 16px;
+  cursor: pointer;
+}
+
+input[type='number'] {
+  max-width: 100px;
+  padding-left: 8px;
+}
+
+input[type='text'] {
+  font-size: 1.1rem;
+}

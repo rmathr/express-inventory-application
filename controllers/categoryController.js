@@ -2,7 +2,6 @@ const { body, validationResult } = require('express-validator');
 const Category = require('../models/category');
 const Product = require('../models/product');
 const asyncHandler = require('express-async-handler');
-const category = require('../models/category');
 
 async function countItems() {
   return {
@@ -63,8 +62,8 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.category_create_get = (req, res, next) => {
-  res.render('category_form', { title: 'Create Category' });
+exports.category_create_get = async (req, res, next) => {
+  res.render('category_form', { title: 'Create Category', count: await countItems() });
 };
 
 exports.category_create_post = [

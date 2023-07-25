@@ -1,35 +1,36 @@
+<link rel="stylesheet" href="/stylesheets/product_form.css">
 <%- include('header.ejs', locals.count) %>
-        <section>
+        <section class="product-form">
             <h1><%- title %></h1>
-            <form action="" method="post">
+            <form class="product-form-inputs" action="" method="post">
                 <div class="form-group">
                     <label>
                         Product Name:
-                        <input type="text" name="product_name" value="<%= locals.product === undefined ? '' : locals.product.product_name %>" required placeholder="Name of product">
+                        <input type="text" name="product_name" value="<%= locals.product === undefined ? '' : locals.product.product_name %>" required placeholder="Enter product name">
                     </label>
                 </div>
                 <div class="form-group">
                     <label>
                         Description:
-                        <textarea name="description" cols="30" rows="10" placeholder="Description" required><%= locals.product  === undefined ? '' : locals.product.description %></textarea>
+                        <textarea name="description" cols="30" rows="10" placeholder="" required><%= locals.product  === undefined ? '' : locals.product.description %></textarea>
                     </label>
                 </div>
 
                 <div class="form-group">
                     <label>
                         Price:
-                        <input type="number" name="price" placeholder="Price of product" min="0" required value="<%= locals.product  === undefined ? '' : locals.product.price %>">
+                        <input type="number" name="price" placeholder="" step=".01" min="0" required value="<%= locals.product  === undefined ? '' : locals.product.price %>">
                     </label>
                 </div>
                 <div class="form-group">
                     <label>
                         Quantity:
-                        <input type="number" name="stock_quantity" min="0" placeholder="Quantity in stock" required value="<%= locals.product  === undefined ? '' : locals.product.stock_quantity %>">
+                        <input type="number" name="stock_quantity" min="0" placeholder="" required value="<%= locals.product  === undefined ? '' : locals.product.stock_quantity %>">
                     </label>
                 </div>
                 <div class="form-group">
-                    <fieldset>
-                        <legend>Category:</legend>
+                    
+                        <label>Category:
                         <select name="category">
                         <% for(let i = 0; i < categories.length; i++){ %>
                             <option value="<%= categories[i]._id%>" id="<%= categories[i]._id.toString()%>" <%= locals.product.category._id.toString() == categories[i]._id.toString() ? 'selected' : '' %>><%= categories[i].name%></option>
@@ -39,9 +40,9 @@
                             
                         <%}%>
                     </select>
-                </fieldset>
+                </label>
                 </div>
-                <button type="submit">Submit</button>
+                <button class="submit-product" type="submit">Submit</button>
             </form>
         </section>
 <%- include('footer.ejs') %>

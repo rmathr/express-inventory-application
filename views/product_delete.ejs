@@ -1,16 +1,17 @@
+<link rel="stylesheet" href="/stylesheets/product_delete.css">
 <%- include('header.ejs', locals.count) %>
-<section>
+<section class="product-delete">
     <h1><%= title %></h1>
     <div class="product-info">
         <p><%= product.product_name %></p>
         <p><%= product.description %></p>
-        <p><%= product.price %></p>
+        <p><%= numeral(product.price).format('$ 0,0[.]00') %></p>
     </div>
         <p>Do you really want to delete this product?</p>
         <form action="" method="post">
             <div class="form-group">
                 <input type="hidden" name="productid" required='true' value="<%= product._id %>">
-                <button type="submit">Delete</button>
+                <button class="product-delete-button" type="submit">Delete</button>
             </div>
         </form>
 </section>

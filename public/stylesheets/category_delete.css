@@ -1,0 +1,24 @@
+.category-delete {
+  padding: 48px;
+  width: 100%;
+}
+
+h1 {
+  font-size: clamp(1rem, 0.6429rem + 1.1429vw, 1.5rem);
+}
+
+.category-delete-products {
+  padding-top: 24px;
+}
+
+.category-delete-products p:first-of-type {
+  font-size: 1.2rem;
+}
+
+.category-delete-products p {
+  margin: 16px 0;
+}
+
+.products-in-category {
+  font-style: italic;
+}
